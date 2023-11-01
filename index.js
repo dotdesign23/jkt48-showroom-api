@@ -6,6 +6,8 @@ const roomRouter = require('./routes/roomRoute');
 const liveRouter = require('./routes/liveRoute');
 const missionRouter = require('./routes/missionRoute');
 
+require('dotenv').config()
+
 const app = express();
 const PORT = 8000;
 
@@ -26,7 +28,7 @@ app.get('/', (req, res) => {
 
 app.get('/api/trigger', (req, res) => {
     const channelId = "706168874525261898" // Channel ID
-    const botToken = "MTE2OTE5NzM3MzI0MzgwNTc1OA.G3QP0L.kGYcqDf5FMbgUtIH1YvoIX5OONhdaRZ1Va6-J4" // Token Bot dari Developer Discord
+    const botToken = process.env.DISCORD_BOT_TOKEN // Token Bot dari Developer Discord
 
     axios.get('https://jkt48-showroom-api-kappa.vercel.app/api/rooms').then(({ data }) => {
         const roomData = data[0]
