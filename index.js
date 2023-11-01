@@ -48,7 +48,7 @@ app.get('/api/trigger', async (req, res) => {
         },
     })
 
-    res.send({ success: true, botToken })
+    res.send({ success: true })
 })
 
 app.use('/api/rooms', roomRouter);
