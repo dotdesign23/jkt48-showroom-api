@@ -30,25 +30,28 @@ app.get('/api/trigger', async (req, res) => {
     const channelId = "706168874525261898" // Channel ID
     const botToken = process.env.DISCORD_BOT_TOKEN // Token Bot dari Developer Discord
 
-    const axiosData = await axios.get('https://jkt48-showroom-api-kappa.vercel.app/api/rooms')
+    const axiosData = await axios.get('https://jkt48-showroom-api-kappa.vercel.app/api/rooms/onlives')
 
-    const roomData = axiosData.data[0]
+    const liveData = axiosData.data
+    const isLive = liveData.is_live 
 
-    await axios.post(`https://discord.com/api/v10/channels/${channelId}/messages`, {
-        embeds: [
-            {
-                "type": "rich",
-                "title": roomData.name,
-                "description": roomData.description,
-            }],
-    }, {
-        headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bot ${botToken}`,
-        },
-    })
+    if (isLive) {
+        await axios.post(`https://discord.com/api/v10/channels/${channelId}/messages`, {
+            embeds: [
+                {
+                    "type": "rich",
+                    "title": "Sedang live",
+                    "description": "Asd",
+                }],
+        }, {
+            headers: {
+                "Content-Type": "application/json",
+                Authorization: `Bot ${botToken}`,
+            },
+        })
+    }
 
-    res.send({ success: true })
+    return res.send({ isLive })
 })
 
 app.use('/api/rooms', roomRouter);
