@@ -26,39 +26,29 @@ app.get('/', (req, res) => {
     })
 });
 
-app.get('/api/trigger', (req, res) => {
+app.get('/api/trigger', async (req, res) => {
     const channelId = "706168874525261898" // Channel ID
     const botToken = process.env.DISCORD_BOT_TOKEN // Token Bot dari Developer Discord
 
-    axios.get('https://jkt48-showroom-api-kappa.vercel.app/api/rooms').then(({ data }) => {
-        const roomData = data[0]
+    const axiosData = await axios.get('https://jkt48-showroom-api-kappa.vercel.app/api/rooms')
 
-        axios.post(`https://discord.com/api/v10/channels/${channelId}/messages`, {
-            embeds: [
-                {
-                    "type": "rich",
-                    "title": roomData.name,
-                    "description": roomData.description,
-                }],
-        }, {
-            headers: {
-                "Content-Type": "application/json",
-                Authorization: `Bot ${botToken}`,
-            },
-        }).catch(() => {
-            res.send({
-                success: false
-            })
-        });
-        
-        res.send({
-            success: true
-        })
-    }).catch(() => {
-        res.send({
-            success: false
-        })
+    const roomData = axiosData.data[0]
+
+    await axios.post(`https://discord.com/api/v10/channels/${channelId}/messages`, {
+        embeds: [
+            {
+                "type": "rich",
+                "title": roomData.name,
+                "description": roomData.description,
+            }],
+    }, {
+        headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bot ${botToken}`,
+        },
     })
+
+    res.send({ success: true, botToken })
 })
 
 app.use('/api/rooms', roomRouter);
