@@ -70,7 +70,7 @@ app.get('/api/trigger', async (req, res) => {
                             },
                             title: roomData.main_name,
                             description: roomData.description,
-                            url: liveDataItem.streaming_url_list[0].url
+                            url: roomData.share_url_live
                         }
                     ],
                 }, {
