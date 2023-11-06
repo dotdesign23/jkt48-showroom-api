@@ -73,51 +73,14 @@ const Rooms = {
         });
       }
 
-      // if (roomIsLive.length === 0) {
-      //   res.send({
-      //     message: "Room Not Live",
-      //     is_live: false,
-      //     data: [],
-      //   });
-      // }
+      if (roomIsLive.length === 0) {
+        res.send({
+          message: "Room Not Live",
+          is_live: false,
+          data: [],
+        });
+      }
 
-      return res.send({
-        "message": "Room Is Live",
-        "is_live": true,
-        "data": [
-          {
-            "room_url_key": "JKT48_Feni",
-            "official_lv": 1,
-            "follower_num": 249104,
-            "started_at": 1699005658,
-            "live_id": 18782278,
-            "image_square": "https://static.showroom-live.com/image/room/cover/bc8b10acffc5adee44b5d8b7dade3bc9435607fe3a766ae772ec633ac08b649b_square_s.jpeg?v=1675092939",
-            "is_follow": false,
-            "streaming_url_list": [
-              {
-                "is_default": true,
-                "url": "https://hls-origin250.showroom-cdn.com/liveedge/34b0732dcf68e1d2b3eaf538e44ce0cfc65f0a024de3a016b98c181a34264541_low/chunklist.m3u8",
-                "label": "low quality",
-                "type": "hls",
-                "id": 4,
-                "quality": 150
-              }
-            ],
-            "live_type": 0,
-            "tags": [
-
-            ],
-            "image": "https://static.showroom-live.com/image/room/cover/bc8b10acffc5adee44b5d8b7dade3bc9435607fe3a766ae772ec633ac08b649b_s.jpeg?v=1675092939",
-            "view_num": 2622,
-            "genre_id": 102,
-            "main_name": "Feni/フェニ（JKT48）",
-            "premium_room_type": 0,
-            "cell_type": 100,
-            "bcsvr_key": "11e9846:tP93rorc",
-            "room_id": 317738
-          }
-        ]
-      })
       res.send({
         message: "Room Is Live",
         is_live: true,
