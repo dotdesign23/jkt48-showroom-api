@@ -28,7 +28,7 @@ app.get('/', (req, res) => {
 });
 
 app.get('/api/trigger', async (req, res) => {
-    const channelId = "1169258513030189117" // Channel ID
+    const channelId = "1171077211202269265" // Channel ID
     const botToken = process.env.DISCORD_BOT_TOKEN // Token Bot dari Developer Discord
 
     const { data: liveData } = await axios.get('https://jkt48-showroom-api-kappa.vercel.app/api/rooms/onlives')
